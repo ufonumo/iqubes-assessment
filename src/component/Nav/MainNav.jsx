@@ -10,7 +10,7 @@ const MainNav = ({getSearch, search, updateSearch}) => {
                     <form onSubmit={getSearch} className="search">
                         <input type="text" placeholder='Search for places' name="search" id="search__bar" value={search} onChange={updateSearch}/>
                         <button type='submit' className='btn'>
-                            <img src="https://img.icons8.com/ios-glyphs/30/ffffff/search--v1.png" id="search__bar_img" />
+                            <img src="https://img.icons8.com/ios-glyphs/30/ffffff/search--v1.png" id="search__bar_img" alt='search' />
                         </button>
                         
                     </form>

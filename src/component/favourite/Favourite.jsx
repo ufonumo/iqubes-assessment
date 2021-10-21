@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import Topcities from '../topCities/Topcities';
 import hot from '../../assets/hot.svg'
 import { Link } from 'react-router-dom';
@@ -15,41 +15,97 @@ const NoFavourites = () => (
     </>
 );
 
+const Favourite = ({favCity}) => {
+    console.log(favCity)
+    
+    const [favData, setFavData] = useState(() => {
+        // getting stored value
+        const saved = localStorage.getItem("allEntries");
+        const initialValue = JSON.parse(saved);
+        console.log(initialValue);
 
-const Favourite = ({weather}) => {
-    console.log(weather.success);
-    // axios.all([
-    //     axios.get('/api/seat/models'),
-    //     axios.get('/api/volkswagen/models')
-    //   ])
-    //   .then(axios.spread(function (seat, volkswagen) {
-    //     let vehicles = seat.data.concat(volkswagen.data);
-    //     this.setState({ vehicles: vehicles })
-    //   }))
-    //   //.then(response => this.setState({ vehicles: response.data }))
-    //   .catch(error => console.log(error));
+        return initialValue || ""; 
+             
+      });
+
+
+    // const favData = JSON.parse(localStorage.getItem('allEntries'))
+
+    useEffect(() => {    
+        RemoveFavourites();
+        // const favDataAll = JSON.parse(localStorage.getItem('allEntries'))
+        // setFavData(favDataAll)
+        // console.log(FavData);
+
+        // window.addEventListener('storage', storageEventHandler, false);
+
+        // window.addEventListener("storage",(e) => {
+        //     alert('it is working')
+        //  });
+
+        // window.addEventListener('storage', () => {
+        //     console.log(JSON.parse(window.localStorage.getItem('allEntries')));
+        //     // const FavData = localStorage.getItem('allEntries')
+        //     // console.log(FavData);
+        //     // setFavData(FavData)
+        //     const favDataAll = JSON.parse(localStorage.getItem('allEntries'))
+        //     setFavData(favDataAll)
+        //     console.log(favData);
+        //     alert('it is working')
+        //     //setCurrentTheme(theme);
+        // })
+        
+    }, [])
+
+    const RemoveFavourites = (fav) => {
+
+        var existingEntries = JSON.parse(localStorage.getItem("allEntries"));
+        if(existingEntries == null) existingEntries = [];
+        var entry = {fav};
+        localStorage.setItem("entry", JSON.stringify(entry));
+        // Save allEntries back to local storage
+        existingEntries.splice(fav, 1);
+        localStorage.setItem("allEntries", JSON.stringify(existingEntries));
+
+    }
+
+    // const FavData = JSON.parse(localStorage.getItem('allEntries'))
     return (
         <>
             {
-                weather.success === false  ? 
+                favData === null  ? 
                    <NoFavourites/>  
                 :
-                <div className="weather">
-                    {/* {weather.map((list, index) =>( */}
-                        <Link to={`/details/${weather?.location?.name}`}>
-                        <div className="weather__container">
-                            <span><img src={weather?.current?.weather_icons ?  weather?.current?.weather_icons : hot}  alt="" /></span>
-                            <h1> {weather?.current?.temperature}&#176;</h1>
-                            <p>{weather?.request?.query}</p>
-                        </div>
-                        </Link>
-                    {/* ))} */}
-                    
-                </div>
+                <>
+                    <div className="nofav">
+                        <h6>
+                            <img src="https://img.icons8.com/color/20/000000/star.png" alt='star'/>
+                            Favourites
+                        </h6>
+                    </div> 
+                    <div className="weather">
+                        {/* {favData.map((list, index) => 
+                        // {return console.log(list)}
+                        (
+                            <div className="weather__container" key={index}>
+                                <p className='star' value={weather} onClick={ () => RemoveFavourites(index)}> 
+                                    <img src="https://img.icons8.com/color/20/000000/star.png" alt='star'/>
+                                </p>                        
+                                <Link to={`/details/${list.city}`}>
+                                    <h1> {list?.temp}&#176;</h1>
+                                    <p>{list?.city}</p>                        
+                                </Link>
+                            </div>
+                        )
+                        )}  */}
+                        
+                    </div>
+                </>
             }
-            
+
+            {/* <NoFavourites/>  */}
                
-            <Topcities/>
+            {/* <Topcities/> */}
         </>
     )
 }

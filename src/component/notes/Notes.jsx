@@ -46,12 +46,6 @@ const Notes = () => {
             <div className="notes">
                 <small>Notes</small>
                 <FormNotes onSubmit={addNotes} />                
-                {/* <div className="note__textarea">
-                    <button className='close'>X</button>
-                    <div className="textarea">
-                        <input onChange={handleNote} value={notes}  type="text" name="" id="" />
-                    </div>
-                </div> */}
                 <NoteList 
                     notes={notes}
                     updateNote={updateNote}

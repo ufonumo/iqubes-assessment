@@ -1,5 +1,4 @@
-import React, {useState} from 'react'
-import sunny from '../../assets/sunny.svg'
+import React from 'react'
 import wind from '../../assets/wind.svg'
 import pressure from '../../assets/pressure.svg'
 import Humidity from '../../assets/Humidity.svg'
