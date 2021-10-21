@@ -1,16 +1,59 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { Link } from 'react-router-dom'
 import hot from '../../assets/hot.svg'
 import Favourite from '../favourite/Favourite'
 import Topcities from '../topCities/Topcities'
+import axios from 'axios';
 
 const Result = ({weather}) => {
-    const SaveFavourites = (fav) => {
-        localStorage.setItem('FavData', JSON.stringify(fav))
-        var FavData = localStorage.getItem('FavData');
-  
-        console.log(JSON.parse(FavData));
+
+    const [citiesData, setStateCitiesData] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [favCity, setfavCity] = useState([])
+    console.log(typeof(favCity));
+
+    useEffect(() => {  
+        const GetTopCities = () => {
+            ['Tokyo', 'Delhi', 'Shanghai', 'Sao Paulo', 'Mexico City'].forEach( async city => {
+            await axios.get(`${process.env.REACT_APP_URL}/current?access_key=${process.env.REACT_APP_APIKEY}&query=${city}`)
+                .then(response => {
+                    let data = response.data;
+                    setStateCitiesData((citiesData) => [...citiesData, Object.values(data)])
+                })
+            });
+            setLoading(false);
+        }   
+        GetTopCities();
+    }, []);
+
+    useEffect(() => {    
+        SaveFavourites();
+   }, [])
+
+    const SaveFavourites = (city, temp) => {
+          // Parse any JSON previously stored in allEntries
+        var existingEntries = JSON.parse(localStorage.getItem("allEntries"));
+        if(existingEntries == null) existingEntries = [];
+        var entry = {city, temp};
+        setfavCity((favCity) => [...favCity, Object.values(entry)])
+        localStorage.setItem("entry", JSON.stringify(entry));
+        // Save allEntries back to local storage
+        existingEntries.push(entry);
+        localStorage.setItem("allEntries", JSON.stringify(existingEntries));
     }
+
+    
+    const RemoveFavourites = (fav) => {
+        var existingEntries = JSON.parse(localStorage.getItem("allEntries"));
+        if(existingEntries == null) existingEntries = [];
+        var entry = {fav};
+        localStorage.setItem("entry", JSON.stringify(entry));
+        // Save allEntries back to local storage
+        existingEntries.splice(fav, 1);
+        localStorage.setItem("allEntries", JSON.stringify(existingEntries));
+
+    }
+
     return (
         <>
             {
@@ -33,8 +76,16 @@ const Result = ({weather}) => {
                         
                 </div>
              }
-             <Favourite />
-             <Topcities />
+             <Favourite
+                RemoveFavourites={RemoveFavourites}
+                favCity={favCity}
+              />
+             <Topcities 
+                citiesData={citiesData}
+                // GetTopCities={GetTopCities}
+                loading={loading}
+                SaveFavourites={SaveFavourites}
+             />
         </>
     )
 }
