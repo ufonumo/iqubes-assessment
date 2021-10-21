@@ -41,8 +41,6 @@ const Topcities = () => {
         
     }
 
-    {<Favourite  favCity={favCity}/>}
-
     if (loading) {
         return (
             <main>
