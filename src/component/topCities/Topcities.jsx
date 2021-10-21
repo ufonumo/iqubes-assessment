@@ -4,14 +4,14 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 const Topcities = () => {
-    const cities = ['Tokyo', 'Delhi', 'Shanghai', 'Sao Paulo', 'Mexico City'];
+    //const cities = ['Tokyo', 'Delhi', 'Shanghai', 'Sao Paulo', 'Mexico City'];
     const [citiesData, setStateCitiesData] = useState([]);
     const [loading, setLoading] = useState(true);
     // const [favCity, setfavCity] = useState([])
 
     useEffect(() => {  
         const GetTopCities = () => {
-            cities.forEach( async city => {
+            ['Tokyo', 'Delhi', 'Shanghai', 'Sao Paulo', 'Mexico City'].forEach( async city => {
             await axios.get(`${process.env.REACT_APP_URL}/current?access_key=${process.env.REACT_APP_APIKEY}&query=${city}`)
                 .then(response => {
                     let data = response.data;
