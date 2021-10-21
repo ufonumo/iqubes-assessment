@@ -183,20 +183,6 @@
   margin-top: 1.4em;
 }
 
-.close{
-  position: absolute;
-  margin-left: 12em;
-  margin-top: 2em;
-}
-
-.note__textarea textarea{
-  background: #FFFFFF;
-  border: 1px solid #E5E5E5;
-  box-sizing: border-box;
-  border-radius: 8px;
-  margin-top: 2em;
-}
-
 .each__elements{
   display: flex;
   margin-top: 3.4em;
@@ -247,4 +233,21 @@
   font-size: 70px;
   line-height: 94px;
   color: #000000;
+}
+
+.close{
+  border: none;
+  background-color: transparent;
+  position: absolute;
+  margin-left: 16em;
+  margin-top: 1em;
+}
+
+.textarea{
+  width: 250px;
+  height: 222px;
+  background: #FFFFFF;
+  border: 1px solid #E5E5E5;
+  box-sizing: border-box;
+  border-radius: 8px;
 }
