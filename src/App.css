@@ -11,6 +11,15 @@
 .container{
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+
+.nav h2{
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 48px;
+  text-align: center;
+  color: #222831;
 }
 
 .search {
@@ -92,6 +101,10 @@
   margin-top: 1em;
 }
 
+.weather a{
+  text-decoration: none;
+}
+
 .weather__container{
   background: linear-gradient(154.6deg, #FFD6C9 2.33%, rgba(255, 255, 255, 0) 83.9%), #FFFFFF;
   box-shadow: 4px 4px 20px rgba(158, 158, 158, 0.2);
@@ -123,11 +136,14 @@
   line-height: 44px;
   color: #222831;
   font-weight: 400;
+  display: flex;
+  align-items: center;
 }
 
 .details h2 small{
   color: #F05454;
   font-size: 12px;
+  font-weight: 600;
   margin-left: 1em;
 }
 
@@ -145,7 +161,7 @@
 
 .details__container__weather{
   display: grid;
-  grid-template-columns: 250px 400px 0;
+  grid-template-columns: 250px 300px 0;
   background: #FFFFFF;
   box-shadow: 4px 4px 20px rgba(158, 158, 158, 0.2);
   border-radius: 16px;
@@ -153,14 +169,19 @@
   margin-top: 1em;
 }
 
+.details__container__weather img{
+  width: 80%;
+  object-fit: fill;
+}
+
 .sunny__dets{
   margin-top: 3em;
 }
 
 .sunny__dets h4{
-  font-size: 24px;
-  line-height: 34px;
-  text-transform: uppercase;
+  font-size: 18px;
+  line-height: 24px;
+  /* text-transform: uppercase; */
   color: #222831;
   font-weight: 400;
 }
@@ -173,11 +194,20 @@
   margin-top: 1em;
 }
 
+.Temperature__content img{
+  width: 40px;
+  height: 40px;
+}
+
 .notes input{
   background: #FFFFFF;
   border: 1px solid #E5E5E5;
   box-sizing: border-box;
   border-radius: 8px;
+  border-top-left-radius: 8px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 8px;
   padding: 1em;
   outline: none;
   margin-top: 1.4em;
@@ -205,8 +235,8 @@
   line-height: 100px;
 }
 
-.wind{
-  margin-right: 1.3em;
+.wind, .Temperature{
+  margin-right: 2.1em;
 }
 
 .wind__content , .Temperature__content{
@@ -243,11 +273,128 @@
   margin-top: 1em;
 }
 
-.textarea{
-  width: 250px;
-  height: 222px;
+.note{
+  display: flex;
+  margin-top: 1em;
+}
+
+.note-row{
+  width: 30%;
+  height: 100px;
   background: #FFFFFF;
   border: 1px solid #E5E5E5;
   box-sizing: border-box;
-  border-radius: 8px;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  border-right: none;
+  padding: 1em;
+}
+
+.icons {
+  background: #fff;
+  border: 1px solid #E5E5E5;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-left: none;
+}
+
+svg.delete-icon {
+  padding: 10px;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  outline: none;
+  color: #222831;
+  text-transform: capitalize;
+  font-size: 25px;
+}
+
+svg.edit-icon {
+  padding: 10px;
+  color: #222831;
+  font-size: 25px;
+
+}
+
+.submit__btn{
+  padding: 16px;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  outline: none;
+  background: #222831;
+  color: #fff;
+  text-transform: capitalize;
+}
+
+@media screen and (max-width: 768px) {
+  .details__content {
+    display: grid;
+    grid-template-columns: 450px 300px;
+  }
+  .notes input{
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 526px) {
+  .degrees {
+    display: none;
+  }
+  .nav {
+    padding: 1.5em 1em;
+  }
+  .nav h2{
+    font-size: 24px;
+    line-height: 38px;
+  }
+  .container {
+    justify-content: center;
+    flex-direction: column; 
+  }
+  .weather {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    margin: 1em;
+  }
+  .details {
+    padding: 1em 1em;
+  }
+  .details h2 {
+    font-size: 20px;
+    line-height: 34px;
+    display: block;
+  }
+  .details h2 small {
+    font-size: 10px;
+  }
+  .details__content {
+    grid-template-columns: 1fr;
+  }
+  .details__container__weather {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .details__container__weather img {
+    width: 100%;
+  }
+  .each__elements {
+    display: flex;
+    flex-direction: column;
+    margin-top: 3.4em;
+  }
+  .notes {
+    margin-top: 1.5em;
+  }
+  .note-row {
+    width: 100%;
+  }
+  .notes input{
+    width: 70%;
+  }
+  .wind, .Temperature {
+    margin-right: 0;
+    margin-top: 1em;
+  }
 }

@@ -2,24 +2,11 @@ import React, {useState} from 'react'
 import sunny from '../../assets/sunny.svg'
 import wind from '../../assets/wind.svg'
 import pressure from '../../assets/pressure.svg'
-import { useParams } from 'react-router'
+import Humidity from '../../assets/Humidity.svg'
+import Notes from '../notes/Notes'
 
 const Details = ({ weather }) => {
 
-    const [notes, setnotes] = useState('')
-
-    const handleNote = (e) =>{
-       setnotes(e.target.value);
-    }
-
-    const handleForm = (e) => {
-        e.preventDefault();
-        localStorage.setItem('notes', JSON.stringify(notes))
-    }
-       
-   const updatedNotes = localStorage.getItem('notes')
-    //  const newNotes = updatedNotes ? JSON.parse(updatedNotes)  : {}
-    console.log(updatedNotes);
 
     return (
         <>
@@ -32,37 +19,22 @@ const Details = ({ weather }) => {
                     <div className="details__container">
                         <small>Weather</small>
                         <div className="details__container__weather">
-                        <img src={sunny} alt="" />
+                        <img src={weather?.current?.weather_icons} alt={weather?.current?.weather_icons} />
                         <div className="sunny__dets">
-                            <h4>Sunny</h4>
-                            <p>Cloud Cover - {weather.current.cloudcover}</p>
-                            <p>Feels Like - {weather.current.temperature}</p>
+                            <h4>{weather?.current?.weather_descriptions}</h4>
+                            <p>Cloud Cover - {weather?.current?.cloudcover}</p>
+                            <p>Feels Like - {weather?.current?.temperature}</p>
                         </div>
                         </div>
                     </div>
-                    <div className="notes">
-                        <small>Notes</small>
-                        <form onSubmit={handleForm}>
-                            <input type="text" placeholder='New Note' name="notes" onChange={handleNote} />
-                            <button>submit</button>
-                        </form>
-                        
-                        <div className="note__textarea">
-                            <button className='close'>X</button>
-                            {/* <textarea name="" id="" cols="27" rows="10" value={notes}></textarea> */}
-                            <div className="textarea">
-                                <input onChange={handleNote} value={notes}  type="text" name="" id="" />
-                            </div>
-                        </div>
-                        
-                    </div>
+                    <Notes/>
                 </div> 
 
                 <div className="each__elements">
                     <div className="Temperature">
                         <small>Temperature</small>
                         <div className="weather__container Temperature__content">
-                            <span><img src={weather?.current?.weather_icons} alt="" /> <br /> Hot</span>
+                            <span><img src={weather?.current?.weather_icons} alt={weather?.request?.query} /> <br /> {weather?.current?.weather_descriptions}</span>
                             <h1>{weather?.current?.temperature}&#176;</h1>
                         </div>  
                     </div> 
@@ -71,7 +43,7 @@ const Details = ({ weather }) => {
                         <small>Wind</small>
                         <div className="wind__content">
                             <div>
-                                <img src={wind} alt="" />
+                                <img src={wind} alt="wind" />
                             </div>
                             <div>
                                 <p>Speed - {weather?.current?.wind_speed}</p>
@@ -85,10 +57,36 @@ const Details = ({ weather }) => {
                         <small>Pressure</small>
                         <div className="wind__content">
                             <div>
-                                <img src={pressure} alt="" />
+                                <img src={pressure} alt="pressure" />
                             </div>
                             <div className='pressure__h2'>
                                <h2>{weather?.current?.pressure}</h2>
+                            </div>
+                        </div>  
+                    </div> 
+                </div>
+
+                <div className="each__elements">
+                    <div className="wind">
+                        <small>Humidity</small>
+                        <div className="wind__content">
+                            <div>
+                                <img src={Humidity} alt="Humidity" />
+                            </div>
+                            <div className='pressure__h2'>
+                               <h2>{weather?.current?.humidity}</h2>
+                            </div>
+                        </div>  
+                    </div> 
+
+                    <div className="wind">
+                        <small>Visibility</small>
+                        <div className="wind__content">
+                            <div>
+                                <img src={pressure} alt="visibility" />
+                            </div>
+                            <div className='pressure__h2'>
+                               <h2>{weather?.current?.visibility}</h2>
                             </div>
                         </div>  
                     </div> 

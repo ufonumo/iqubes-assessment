@@ -35,15 +35,15 @@ const Favourite = ({weather}) => {
                    <NoFavourites/>  
                 :
                 <div className="weather">
-                    {weather.map((list, index) =>(
-                        <Link to={`/details/${list?.location?.name}`}>
-                        <div key={index} className="weather__container">
-                            <span><img src={list?.current?.weather_icons ?  list?.current?.weather_icons : hot}  alt="" /></span>
-                            <h1> {list?.current?.temperature}&#176;</h1>
-                            <p>{list?.request?.query}</p>
+                    {/* {weather.map((list, index) =>( */}
+                        <Link to={`/details/${weather?.location?.name}`}>
+                        <div className="weather__container">
+                            <span><img src={weather?.current?.weather_icons ?  weather?.current?.weather_icons : hot}  alt="" /></span>
+                            <h1> {weather?.current?.temperature}&#176;</h1>
+                            <p>{weather?.request?.query}</p>
                         </div>
                         </Link>
-                    ))}
+                    {/* ))} */}
                     
                 </div>
             }

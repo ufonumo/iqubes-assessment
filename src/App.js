@@ -22,7 +22,7 @@ function App() {
         // data.current 
         // data.location
         // data.request
-        setweather(Object.values(data));
+        setweather(data);
       };
 
       console.log(weather);
