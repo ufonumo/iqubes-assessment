@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
-import Topcities from '../topCities/Topcities';
-import hot from '../../assets/hot.svg'
-import { Link } from 'react-router-dom';
+// import Topcities from '../topCities/Topcities';
+// import hot from '../../assets/hot.svg'
+// import { Link } from 'react-router-dom';
 
 const NoFavourites = () => (
     <>
@@ -17,24 +17,15 @@ const NoFavourites = () => (
 
 const Favourite = ({favCity}) => {
     console.log(favCity)
-    
-    const [favData, setFavData] = useState(() => {
-        // getting stored value
-        const saved = localStorage.getItem("allEntries");
-        const initialValue = JSON.parse(saved);
-        console.log(initialValue);
 
-        return initialValue || ""; 
-             
-      });
-
+    const [favData, setFavData] = useState([]);
 
     // const favData = JSON.parse(localStorage.getItem('allEntries'))
 
     useEffect(() => {    
         RemoveFavourites();
-        // const favDataAll = JSON.parse(localStorage.getItem('allEntries'))
-        // setFavData(favDataAll)
+        const favDataAll = JSON.parse(localStorage.getItem('allEntries'))
+        setFavData(favDataAll)
         // console.log(FavData);
 
         // window.addEventListener('storage', storageEventHandler, false);

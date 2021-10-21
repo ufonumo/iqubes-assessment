@@ -2,13 +2,12 @@ import React, {useEffect, useState} from 'react'
 import hot from '../../assets/hot.svg'
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import Favourite from '../favourite/Favourite';
 
 const Topcities = () => {
     const cities = ['Tokyo', 'Delhi', 'Shanghai', 'Sao Paulo', 'Mexico City'];
     const [citiesData, setStateCitiesData] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [favCity, setfavCity] = useState([])
+    // const [favCity, setfavCity] = useState([])
 
     useEffect(() => {  
         const GetTopCities = () => {
@@ -33,7 +32,6 @@ const Topcities = () => {
         var existingEntries = JSON.parse(localStorage.getItem("allEntries"));
         if(existingEntries == null) existingEntries = [];
         var entry = {city, temp};
-        setfavCity(entry)
         localStorage.setItem("entry", JSON.stringify(entry));
         // Save allEntries back to local storage
         existingEntries.push(entry);
