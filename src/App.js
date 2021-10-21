@@ -19,9 +19,9 @@ function App() {
       const GetWeather = async () => {
         const response = await fetch(baseURL);
         let data = await response.json();
-        data.current 
-        data.location
-        data.request
+        // data.current 
+        // data.location
+        // data.request
         setweather(Object.values(data));
       };
 
