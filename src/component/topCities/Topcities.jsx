@@ -59,7 +59,7 @@ const Topcities = () => {
             <div className="weather">
                 {citiesData.map((list, index) => (
                     <>
-                        <div className="weather__container">
+                        <div className="weather__container" key={index}>
                             <span><img src={hot} alt="weather" /></span>
                             <p className='star' onClick={() => SaveFavourites(list[1]?.name, list[2]?.temperature )}> 
                                 <img src="https://img.icons8.com/windows/20/222831/star--v1.png" alt='star'/>
