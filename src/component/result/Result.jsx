@@ -39,6 +39,9 @@ const Result = ({weather}) => {
         localStorage.setItem("entry", JSON.stringify(entry));
         // Save allEntries back to local storage
         existingEntries.push(entry);
+        if(existingEntries) {
+            
+        }
         localStorage.setItem("allEntries", JSON.stringify(existingEntries));
     }
 

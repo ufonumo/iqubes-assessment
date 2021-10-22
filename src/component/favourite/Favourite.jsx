@@ -19,7 +19,7 @@ const Favourite = ({RemoveFavourites, favCity}) => {
     return (
         <>
             {
-                favCity === null  ? 
+                favCity === undefined  ? 
                    <NoFavourites/>  
                 :
                 <>
@@ -37,7 +37,7 @@ const Favourite = ({RemoveFavourites, favCity}) => {
                                 <p className='star' value={list.name} onClick={ () => RemoveFavourites(index)}> 
                                     <img src="https://img.icons8.com/color/20/000000/star.png" alt='star'/>
                                 </p>                        
-                                <Link to={`/details/${list.city}`}>
+                                <Link to={`/details/${list[0]}`}>
                                     <h1> {list[1]}&#176;</h1>
                                     <p>{list[0]}</p>                        
                                 </Link>
