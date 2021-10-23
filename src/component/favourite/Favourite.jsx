@@ -19,7 +19,7 @@ const Favourite = ({RemoveFavourites, favCity}) => {
     return (
         <>
             {
-                favCity === undefined  ? 
+                favCity === [[]]  ? 
                    <NoFavourites/>  
                 :
                 <>

@@ -1,28 +1,45 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import wind from '../../assets/wind.svg'
 import pressure from '../../assets/pressure.svg'
 import Humidity from '../../assets/Humidity.svg'
 import Notes from '../notes/Notes'
+import hot from '../../assets/hot.svg'
+import sunny from '../../assets/sunny.svg'
+import { useParams } from 'react-router'
 
-const Details = ({ weather }) => {
+const Details = () => {
 
+  const {name} = useParams()
+  const [weather, setweather] = useState('')
+
+  useEffect(() => {
+    const GetWeather = async () => {
+      const response = await fetch(`${process.env.REACT_APP_URL}/weather?q=${name}&appid=${process.env.REACT_APP_APIKEY}&units=metric`);
+
+      let data = await response.json();
+      setweather(data);
+    };
+    GetWeather();
+  }, [name]);
 
     return (
         <>
             <div className="details">
                 <div className="container">
-                    <h2>{weather?.request?.query}<small>Last updated: {weather?.current?.observation_time}</small></h2>
+                    <h2>{weather?.name}<small>Last updated: {weather?.current?.observation_time}</small></h2>
                 </div>
 
                 <div className="details__content">
                     <div className="details__container">
                         <small>Weather</small>
                         <div className="details__container__weather">
-                        <img src={weather?.current?.weather_icons} alt={weather?.current?.weather_icons} />
+                        <img src={sunny} alt='sunny' />
                         <div className="sunny__dets">
-                            <h4>{weather?.current?.weather_descriptions}</h4>
-                            <p>Cloud Cover - {weather?.current?.cloudcover}</p>
-                            <p>Feels Like - {weather?.current?.temperature}</p>
+                            <h4>{weather?.weather?.map((list) =>(
+                                list.description
+                            ))}</h4>
+                            <p>Cloud Cover - {weather?.clouds?.all}</p>
+                            <p>Feels Like - {weather?.main?.feels_like}&#176;</p>
                         </div>
                         </div>
                     </div>
@@ -33,8 +50,8 @@ const Details = ({ weather }) => {
                     <div className="Temperature">
                         <small>Temperature</small>
                         <div className="weather__container Temperature__content">
-                            <span><img src={weather?.current?.weather_icons} alt={weather?.request?.query} /> <br /> {weather?.current?.weather_descriptions}</span>
-                            <h1>{weather?.current?.temperature}&#176;</h1>
+                            <span><img src={hot} alt={weather?.request?.query} /> <br /> {weather?.current?.weather_descriptions}</span>
+                            <h1>{weather?.main?.temp}&#176;</h1>
                         </div>  
                     </div> 
                     
@@ -45,9 +62,9 @@ const Details = ({ weather }) => {
                                 <img src={wind} alt="wind" />
                             </div>
                             <div>
-                                <p>Speed - {weather?.current?.wind_speed}</p>
-                                <p>Direction - {weather?.current?.wind_dir}</p>
-                                <p>Angle - {weather?.current?.wind_degree}</p>
+                                <p>Speed - {weather?.wind?.speed}</p>
+                                <p>Direction - {weather?.wind?.deg}</p>
+                                <p>Angle - {weather?.wind?.gust}</p>
                             </div>
                         </div>  
                     </div> 
@@ -59,7 +76,7 @@ const Details = ({ weather }) => {
                                 <img src={pressure} alt="pressure" />
                             </div>
                             <div className='pressure__h2'>
-                               <h2>{weather?.current?.pressure}</h2>
+                               <h2>{weather?.main?.pressure}</h2>
                             </div>
                         </div>  
                     </div> 
@@ -73,7 +90,7 @@ const Details = ({ weather }) => {
                                 <img src={Humidity} alt="Humidity" />
                             </div>
                             <div className='pressure__h2'>
-                               <h2>{weather?.current?.humidity}</h2>
+                               <h2>{weather?.main?.humidity}</h2>
                             </div>
                         </div>  
                     </div> 
@@ -85,7 +102,7 @@ const Details = ({ weather }) => {
                                 <img src={pressure} alt="visibility" />
                             </div>
                             <div className='pressure__h2'>
-                               <h2>{weather?.current?.visibility}</h2>
+                               <h2>{weather?.visibility}</h2>
                             </div>
                         </div>  
                     </div> 

@@ -7,19 +7,21 @@ import MainNav from './component/Nav/MainNav';
 import Result from "./component/result/Result";
 
 function App() {
-  const [search, setSearch] = useState("New york");
+  const [search, setSearch] = useState("");
     const [query, setQuery] = useState('');
     const [weather, setweather] = useState([]);
 
     useEffect(() => {
       const GetWeather = async () => {
-        const response = await fetch(`${process.env.REACT_APP_URL}/current?access_key=${process.env.REACT_APP_APIKEY}&query=${query}`);
+        const response = await fetch(`${process.env.REACT_APP_URL}/weather?q=${query}&appid=${process.env.REACT_APP_APIKEY}&units=metric`);
 
         let data = await response.json();
         setweather(data);
       };
       GetWeather();
     }, [query]);
+
+    console.log(weather);
     
     const updateSearch = e =>{
         setSearch(e.target.value);
@@ -44,7 +46,7 @@ function App() {
             <Result weather={weather}/>
           </Route>
           <Route path='/details/:name'>
-            <Details weather={weather} />
+            <Details />
           </Route>
         </Switch>
       </div>

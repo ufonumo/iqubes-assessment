@@ -114,7 +114,7 @@
 }
 
 .weather__container h1{
-  font-size: 64px;
+  font-size: 50px;
   line-height: 78px;
   color: #000000;
   font-weight: 400;
@@ -175,7 +175,7 @@
 }
 
 .sunny__dets{
-  margin-top: 3em;
+  margin-top: 1em;
 }
 
 .sunny__dets h4{
@@ -265,7 +265,7 @@
 }
 
 .pressure__h2 h2{
-  font-size: 70px;
+  font-size: 50px;
   line-height: 94px;
   color: #000000;
 }

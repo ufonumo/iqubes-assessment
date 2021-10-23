@@ -23,15 +23,15 @@ const Topcities = ({citiesData, loading ,SaveFavourites}) => {
 
             <div className="weather">
                 {citiesData.map((list, index) => (
-                    <>
+                    <>     
                         <div className="weather__container" key={index}>
                             <span><img src={hot} alt="weather" /></span>
-                            <p className='star' onClick={() => SaveFavourites(list[1]?.name, list[2]?.temperature )}> 
+                            <p className='star' onClick={() => SaveFavourites(list?.[11], list[3]?.temp)}> 
                                 <img src="https://img.icons8.com/windows/20/222831/star--v1.png" alt='star'/>
                             </p>                       
-                            <Link to={`/details/${list[1].name}`} key={index}>
-                                <h1>{list[2]?.temperature}&#176;</h1>
-                                <p>{list[0]?.query}</p>                        
+                            <Link to={`/details/${list?.[11]}`} key={index}>
+                                <h1>{list[3]?.temp}&#176;</h1>
+                                <p>{list?.[11]}</p>                        
                             </Link>
 
                         </div>
